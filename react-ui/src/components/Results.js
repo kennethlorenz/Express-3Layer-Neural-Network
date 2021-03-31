@@ -6,15 +6,23 @@ import { NavLink } from "react-router-dom";
 const Results = (props) => {
   const [data, setData] = useState({});
   const [showLoading, setShowLoading] = useState(true);
-  const { sepalwidth, petallength, petalwidth, epoch, lr } =
+  const { sepalLength, sepalWidth, petalLength, petalWidth, epoch, lr } =
     (props.location && props.location.state) || {};
   console.log(lr);
-  const apiUrl = "http://localhost:3000/run";
+  const apiUrl = "http://localhost:3000/runwithparams";
+  const body = {
+    sepalLength: parseFloat(sepalLength),
+    sepalWidth: parseFloat(sepalWidth),
+    petalLength: parseFloat(petalLength),
+    petalWidth: parseFloat(petalWidth),
+    epoch: parseFloat(epoch),
+    lr: parseFloat(lr),
+  };
   //runs once after the first rendering of page
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(apiUrl)
+        .post(apiUrl, body)
         .then((result) => {
           console.log("result.data:", result.data);
           setData(result.data);
