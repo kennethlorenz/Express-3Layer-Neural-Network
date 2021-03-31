@@ -145,10 +145,10 @@ exports.trainWithParams = function (req, res) {
   //tensor of features for testing data
   const testingData = tf.tensor2d(
     irisTesting.map((item) => [
-      req.body.sepal_length,
-      req.body.sepal_width,
-      req.body.petal_length,
-      req.body.petal_width,
+      req.body.sepalLength,
+      req.body.sepalWidth,
+      req.body.petalLength,
+      req.body.petalWidth,
     ])
   );
 
@@ -181,7 +181,7 @@ exports.trainWithParams = function (req, res) {
   //compile the model with an MSE loss function and Adam algorithm
   model.compile({
     loss: "meanSquaredError",
-    optimizer: tf.train.adam(req.body.learningRate),
+    optimizer: tf.train.adam(req.body.lr),
   });
 
   console.log(model.summary());
