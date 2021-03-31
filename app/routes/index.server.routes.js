@@ -6,4 +6,5 @@ module.exports = function (app) {
     });
   });
   app.get("/run", index.trainAndPredict);
+  app.post("/runwithparams", index.trainWithParams);
 };
